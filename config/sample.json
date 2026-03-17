@@ -1,0 +1,29 @@
+{
+    "endpoints": [
+      {
+        "name": "Single Post",
+        "url": "https://jsonplaceholder.typicode.com/posts/1",
+        "expected_schema": {
+          "userId": "int",
+          "id": "int",
+          "title": "string",
+          "body": "string"
+        }
+      },
+      {
+        "name": "User with nested address",
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "expected_schema": {
+          "id": "int",
+          "name": "string",
+          "username": "string",
+          "email": "string",
+          "address": {
+            "street": "string",
+            "city": "string",
+            "zipcode": "string"
+          }
+        }
+      }
+    ]
+  }
