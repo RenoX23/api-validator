@@ -14,11 +14,16 @@ Detects missing fields, type mismatches, and unexpected extra fields — includi
 ## Project Structure
 ```
 api-validator/
+├── .gitignore
 ├── main.py                  # CLI entry point
 ├── requirements.txt
+├── README.md
 ├── config/
 │   └── sample.json          # Endpoint URLs and expected schemas
+├── screenshots/
+│   └── validation_report1.png
 └── validator/
+    ├── __init__.py
     ├── fetcher.py            # HTTP GET requests with error handling
     ├── comparator.py         # Schema comparison logic (supports nested objects)
     └── reporter.py           # Formats and prints the validation report
@@ -26,7 +31,7 @@ api-validator/
 
 ## Setup
 ```bash
-git clone https://github.com/YOUR_USERNAME/api-validator.git
+git clone https://github.com/RenoX23/api-validator.git
 cd api-validator
 pip install -r requirements.txt
 ```
@@ -75,10 +80,13 @@ For nested objects, mirror the structure directly in the schema:
 
 ![Validation Report](screenshots/validation_report1.png)
 
+![Validation Report](screenshots/validation_report2.png)
+
+![Project Structure](screenshots/structure.png)
+
+![Core File](screenshots/core_file.png)
 ## Sample APIs Used for Testing
 
 - `https://jsonplaceholder.typicode.com/posts/1` — flat response, all fields match
 - `https://jsonplaceholder.typicode.com/users/1` — nested address object, extra fields detected as warnings
 ```
-
----
