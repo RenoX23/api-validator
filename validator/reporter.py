@@ -39,6 +39,8 @@ def print_report(results):
                 print(f"  └─ '{field}' is missing from response")
             elif issue == "type_mismatch":
                 print(f"  └─ '{field}' expected {m['expected']}, got {m['got']}")
+            elif issue == "null_value":
+                print(f"  └─ '{field}' is null, expected {m['expected']}")
             elif issue == "unknown_type_in_schema":
                 print(f"  └─ '{field}' has unknown type '{m['expected']}' in schema")
 

@@ -24,6 +24,14 @@ def compare(actual, expected, path=""):
             continue
 
         actual_value = actual[key]
+        if actual_value is None:
+            mismatches.append({
+                "field": current_path,
+                "issue": "null_value",
+                "expected": expected_type,
+                "got": None
+                })
+            continue
 
         # Expected type is a nested object — recurse
         if isinstance(expected_type, dict):
