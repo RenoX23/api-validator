@@ -73,7 +73,7 @@ For nested objects, mirror the structure directly in the schema:
 
 ## Sample Output
 
-![Validation Report](screenshot.png)
+![Validation Report](validation_report1.png)
 
 ## Sample APIs Used for Testing
 
@@ -82,4 +82,3 @@ For nested objects, mirror the structure directly in the schema:
 ```
 
 ---
-
