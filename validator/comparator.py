@@ -34,6 +34,36 @@ def compare(actual, expected, path=""):
             continue
 
         # Expected type is a nested object — recurse
+        # Expected type is a list_of hint — validate each element
+        if isinstance(expected_type, dict) and "list_of" in expected_type:
+            element_type = expected_type["list_of"]
+            if not isinstance(actual_value, list):
+                mismatches.append({
+                    "field": current_path,
+                    "issue": "type_mismatch",
+                    "expected": "list",
+                    "got": type(actual_value).__name__
+                })
+            else:
+                expected_element_type = TYPE_MAP.get(element_type)
+                for i, element in enumerate(actual_value):
+                    if isinstance(element, bool) and expected_element_type == int:
+                        mismatches.append({
+                            "field": f"{current_path}[{i}]",
+                            "issue": "type_mismatch",
+                            "expected": element_type,
+                            "got": "bool"
+                        })
+                    elif expected_element_type and not isinstance(element, expected_element_type):
+                        mismatches.append({
+                            "field": f"{current_path}[{i}]",
+                            "issue": "type_mismatch",
+                            "expected": element_type,
+                            "got": type(element).__name__
+                        })
+            continue
+
+        # Expected type is a nested object — recurse
         if isinstance(expected_type, dict):
             if not isinstance(actual_value, dict):
                 mismatches.append({
@@ -58,6 +88,15 @@ def compare(actual, expected, path=""):
             continue
 
         expected_python_type = TYPE_MAP[expected_type]
+
+        if isinstance(actual_value, bool) and expected_python_type == int:
+            mismatches.append({
+                "field": current_path,
+                "issue": "type_mismatch",
+                "expected": expected_type,
+                "got": "bool"
+             })
+            continue
 
         if not isinstance(actual_value, expected_python_type):
             mismatches.append({

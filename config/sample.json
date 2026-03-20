@@ -24,6 +24,16 @@
             "zipcode": "string"
           }
         }
+      },
+      {
+        "name": "Todo item with list_of tags",
+        "url": "https://jsonplaceholder.typicode.com/todos/1",
+        "expected_schema": {
+          "userId": "int",
+          "id": "int",
+          "title": "string",
+          "completed": "bool"
+        }
       }
     ]
   }
